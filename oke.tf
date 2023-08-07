@@ -71,17 +71,17 @@ resource "null_resource" "keda_setup" {
 	  EOT
     
   }
-   provisioner "local-exec" {
+  #  provisioner "local-exec" {
 
    
-   command = <<-EOT
+  #  command = <<-EOT
       
-      git clone https://github.com/oracle-devrel/oci-arch-queue-oke-demo.git
+  #     git clone https://github.com/oracle-devrel/oci-arch-queue-oke-demo.git
       
 
-    EOT
+  #   EOT
     
-  }
+  # }
   provisioner "local-exec" {
 
    
