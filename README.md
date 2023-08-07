@@ -31,6 +31,22 @@ If you don't have the required permissions and quota, contact your tenancy admin
 
 7. If no further changes are necessary, return to the Stack Details page, click **Terraform Actions**, and select **Apply**. 
 
+## Validate the Deployment
+
+- Post the infra deployment, note down `queue_dpendpoint` , `queue_ocid` (part of the resource manager job logs/output) to use it as part of Producer. For more details github link of  <a href="https://github.com/oracle-devrel/oci-arch-queue-oke-demo/blob/main/local-producer/readme.md">Producer</a>
+- A sample stack output will be as below
+
+```java
+Outputs:
+deployed_oke_kubernetes_version = "v1.26.2"
+deployed_to_region = "ap-tokyo-1"
+dev = "Made with ❤ by Oracle Developers"
+kubeconfig_for_kubectl = "export KUBECONFIG=./generated/kubeconfig"
+ocir_name = "container_repo1"
+ocir_ocid = "ocid1.containerrepo.oc1.ap-tokyo-1.0.iaassiedupu.aaaaaaaarisfwdc55aa5qbvikte6qxw7qsdij3rz4re5qtfxnvdigwtibmmq"
+queue_dpendpoint = "https://cell-1.queue.messaging.ap-tokyo-1.oci.oraclecloud.com"
+queue_ocid = "ocid1.queue.oc1.ap-tokyo-1.amaaaaaa2wppjyqag6eeyinjug2je6mwh4hazaa3iu6tfdpqt2ppk7njlolq" 
+```
 ## Deploy Using the Terraform CLI
 
 ### Clone the Module
