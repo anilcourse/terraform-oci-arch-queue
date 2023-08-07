@@ -1,7 +1,7 @@
 resource "oci_queue_queue" "test_queue" {
   #Required
   compartment_id = var.compartment_ocid
-  display_name   = var.queue_display_name
+  display_name   = "${var.queue_display_name}_${random_id.tag.hex}"
 
   #Optional
   # custom_encryption_key_id = oci_kms_key.test_key.id

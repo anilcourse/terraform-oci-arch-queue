@@ -3,7 +3,7 @@
 
 resource "oci_identity_dynamic_group" "dg_queues" {
   provider       = oci.home_region
-  name           = "queue_dg_tf"
+  name           = "queue_dg_tf_${random_id.tag.hex}"
   description    = "dynamic group for queue demo"
   compartment_id = var.tenancy_ocid
   matching_rule  = "Any {All {instance.compartment.id = '${var.compartment_ocid}'},ALL {resource.type = 'fnfunc',resource.compartment.id = '${var.compartment_ocid}'},ALL {resource.type = 'ApiGateway', resource.compartment.id = '${var.compartment_ocid}'}}"
@@ -13,7 +13,7 @@ resource "oci_identity_policy" "queue_demo_policies" {
   
   provider       = oci.home_region
   compartment_id = var.compartment_ocid
-  name           = "Queue_demo_policies"
+  name           = "Queue_demo_policies_${random_id.tag.hex}"
   
   description    = "Policy to provide access to use queue , fn invoke "
   statements = [

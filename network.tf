@@ -6,7 +6,7 @@
 resource "oci_core_virtual_network" "vcn" {
   cidr_block     = var.VCN-CIDR
   compartment_id = var.compartment_ocid
-  display_name   = "queue_vcn"
+  display_name   = "queue_vcn_${random_id.tag.hex}"
   defined_tags   = {}
 }
 
@@ -14,7 +14,7 @@ resource "oci_core_virtual_network" "vcn" {
 
 resource "oci_core_internet_gateway" "application_internet_gateway" {
   compartment_id = var.compartment_ocid
-  display_name   = "${var.app_name}_app_internet_gateway"
+  display_name   = "${var.app_name}_app_internet_gateway_${random_id.tag.hex}"
   vcn_id         = oci_core_virtual_network.vcn.id
   defined_tags   = {}
 }
@@ -22,7 +22,7 @@ resource "oci_core_internet_gateway" "application_internet_gateway" {
 # Create service gateway for OCI service access
 resource "oci_core_service_gateway" "application_service_gateway" {
   compartment_id = var.compartment_ocid
-  display_name   = "${var.app_name}_app_servicegateway"
+  display_name   = "${var.app_name}_app_servicegateway_${random_id.tag.hex}"
   vcn_id         = oci_core_virtual_network.vcn.id
   services {
     service_id = lookup(data.oci_core_services.all_services.services[0], "id")
@@ -33,7 +33,7 @@ resource "oci_core_service_gateway" "application_service_gateway" {
 
 resource "oci_core_nat_gateway" "application_nat_gateway" {
   compartment_id = var.compartment_ocid
-  display_name   = "${var.app_name}_app_natgateway"
+  display_name   = "${var.app_name}_app_natgateway_${random_id.tag.hex}"
   vcn_id         = oci_core_virtual_network.vcn.id
   defined_tags   = {}
 }
@@ -43,7 +43,7 @@ resource "oci_core_nat_gateway" "application_nat_gateway" {
 resource "oci_core_route_table" "application_private_route_table" {
   compartment_id = var.compartment_ocid
   vcn_id         = oci_core_virtual_network.vcn.id
-  display_name   = "vcn_route_table"
+  display_name   = "vcn_route_table_${random_id.tag.hex}"
 
   route_rules {
     description       = "Traffic to the internet"
@@ -63,7 +63,7 @@ resource "oci_core_route_table" "application_private_route_table" {
 resource "oci_core_route_table" "application_public_route_table" {
   compartment_id = var.compartment_ocid
   vcn_id         = oci_core_virtual_network.vcn.id
-  display_name   = "function_rt"
+  display_name   = "function_rt_${random_id.tag.hex}"
 
   route_rules {
     description       = "Traffic to/from internet"

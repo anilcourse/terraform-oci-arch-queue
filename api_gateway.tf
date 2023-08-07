@@ -4,7 +4,7 @@
 resource "oci_apigateway_gateway" "api_gateway" {
   compartment_id             = var.compartment_ocid
   defined_tags               = {}
-  display_name               = "${var.app_name}_api_gateway"
+  display_name               = "${var.app_name}_api_gateway__${random_id.tag.hex}"
   endpoint_type              = "PUBLIC"
   freeform_tags              = {}
   network_security_group_ids = []
@@ -26,7 +26,7 @@ resource "oci_apigateway_deployment" "queue_length_deployment" {
   # depends_on = [ null_resource.function_Push2OCIR ]
   compartment_id = var.compartment_ocid
   defined_tags   = {}
-  display_name   = "queue-api-deployment"
+  display_name   = "queue-api-deployment_${random_id.tag.hex}"
   freeform_tags  = {}
   gateway_id     = oci_apigateway_gateway.api_gateway.id
   path_prefix    = var.path_prefix
