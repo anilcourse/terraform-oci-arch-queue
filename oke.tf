@@ -66,7 +66,7 @@ resource "null_resource" "keda_setup" {
     command     = <<-EOT
       export KUBECONFIG=${path.module}/generated/kubeconfig
       kubectl apply --server-side -f https://github.com/kedacore/keda/releases/download/v2.11.2/keda-2.11.2.yaml 
-      kubectl create secret docker-registry queueoke-secret --docker-server='${local.ocir_docker_repository}/${local.ocir_namespace}/${oci_artifacts_container_repository.fn_container_repository.display_name} --docker-username='${local.ocir_namespace}/${var.ocir_user_name}' --docker-password='${var.ocir_user_password}'
+      kubectl create secret docker-registry queueoke-secret --docker-server='${local.ocir_docker_repository}/${local.ocir_namespace}/${oci_artifacts_container_repository.fn_container_repository.display_name}' --docker-username='${local.ocir_namespace}/${var.ocir_user_name}' --docker-password='${var.ocir_user_password}'
       
 	  EOT
     
