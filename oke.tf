@@ -66,7 +66,7 @@ resource "null_resource" "keda_setup" {
     command     = <<-EOT
       export KUBECONFIG=${path.module}/generated/kubeconfig
       kubectl apply --server-side -f https://github.com/kedacore/keda/releases/download/v2.11.2/keda-2.11.2.yaml 
-      kubectl create secret docker-registry queueoke-secret --docker-server='${local.ocir_docker_repository}/${local.ocir_namespace}/${var.ocir_repo_name}' --docker-username='${local.ocir_namespace}/${var.ocir_user_name}' --docker-password='${var.ocir_user_password}'
+      kubectl create secret docker-registry queueoke-secret --docker-server='${local.ocir_docker_repository}/${local.ocir_namespace}/${oci_artifacts_container_repository.fn_container_repository.display_name} --docker-username='${local.ocir_namespace}/${var.ocir_user_name}' --docker-password='${var.ocir_user_password}'
       
 	  EOT
     
@@ -98,7 +98,7 @@ resource "null_resource" "keda_setup" {
     
     
     mvn clean package
-    docker build -t ${local.ocir_docker_repository}/${local.ocir_namespace}/${var.ocir_repo_name}/queueoke .
+    docker build -t ${local.ocir_docker_repository}/${local.ocir_namespace}/${oci_artifacts_container_repository.fn_container_repository.display_name}/queueoke .
     EOT
     working_dir = "${path.root}/oci-arch-queue-oke-demo/oke-consumer"
     
@@ -109,8 +109,8 @@ resource "null_resource" "keda_setup" {
 	}
   provisioner "local-exec" {
     command     = <<-EOT
-    docker push ${local.ocir_docker_repository}/${local.ocir_namespace}/${var.ocir_repo_name}/queueoke:latest
-    sed -i 's|IMAGE_NAME|${local.ocir_docker_repository}/${local.ocir_namespace}/${var.ocir_repo_name}/queueoke:latest|g' queue-oke.yaml
+    docker push ${local.ocir_docker_repository}/${local.ocir_namespace}/${oci_artifacts_container_repository.fn_container_repository.display_name}/queueoke:latest
+    sed -i 's|IMAGE_NAME|${local.ocir_docker_repository}/${local.ocir_namespace}/${oci_artifacts_container_repository.fn_container_repository.display_name}/queueoke:latest|g' queue-oke.yaml
     sed -i 's|API_GATEWAY_URL|${oci_apigateway_deployment.queue_length_deployment.endpoint}${var.consumer_route_path}|g' so-object.yaml
    
     EOT
@@ -123,7 +123,7 @@ resource "null_resource" "keda_setup" {
     export KUBECONFIG=${path.module}/generated/kubeconfig
     kubectl apply -f ${path.root}/oci-arch-queue-oke-demo/oke-consumer/so-object.yaml
     kubectl apply -f ${path.root}/oci-arch-queue-oke-demo/oke-consumer/queue-oke.yaml
-    kubectl set env deployment/queueoke IMAGE_NAME='${local.ocir_docker_repository}/${local.ocir_namespace}/${var.ocir_repo_name}/queueoke:latest'
+    kubectl set env deployment/queueoke IMAGE_NAME='${local.ocir_docker_repository}/${local.ocir_namespace}/$${oci_artifacts_container_repositoryfn_container_repository.display_name}/queueoke:latest'
     kubectl set env deployment/queueoke QUEUE_ID='${oci_queue_queue.test_queue.id}'
     kubectl set env deployment/queueoke DP_ENDPOINT='${oci_queue_queue.test_queue.messages_endpoint}'
     

@@ -40,8 +40,8 @@ resource "null_resource" "function_Push2OCIR" {
     
     
     mvn clean package
-    docker build -t ${local.ocir_docker_repository}/${local.ocir_namespace}/${var.ocir_repo_name}/queuelength .
-    docker push ${local.ocir_docker_repository}/${local.ocir_namespace}/${var.ocir_repo_name}/queuelength
+    docker build -t ${local.ocir_docker_repository}/${local.ocir_namespace}/${oci_artifacts_container_repository.fn_container_repository.display_name}/queuelength .
+    docker push ${local.ocir_docker_repository}/${local.ocir_namespace}/${oci_artifacts_container_repository.fn_container_repository.display_name}/queuelength
 	EOT
     working_dir = "${path.root}/oci-arch-queue-oke-demo/queue-length-function"
     

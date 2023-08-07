@@ -4,7 +4,7 @@
 resource "oci_apigateway_gateway" "api_gateway" {
   compartment_id             = var.compartment_ocid
   defined_tags               = {}
-  display_name               = "${var.app_name}_api_gateway__${random_id.tag.hex}"
+  display_name               = "${var.app_name}_api_gateway_${random_id.tag.hex}"
   endpoint_type              = "PUBLIC"
   freeform_tags              = {}
   network_security_group_ids = []
