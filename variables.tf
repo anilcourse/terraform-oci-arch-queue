@@ -7,10 +7,9 @@ variable "fingerprint" {}
 variable "private_key_path" {}
 variable "compartment_ocid" {}
 variable "region" {default = "us-ashburn-1"}
-variable "home_region" {}
+variable "home_region" { default = ""}
 variable "ocir_user_name" {}
 variable "ocir_user_password" {}
-variable "generate_public_ssh_key" {}
 variable "queue_display_name" {
   default = "demo_queue"
 }
