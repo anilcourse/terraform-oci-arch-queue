@@ -3,8 +3,14 @@
 
 variable "tenancy_ocid" {}
 variable "current_user_ocid" {}
-variable "fingerprint" {}
-variable "private_key_path" {}
+variable "fingerprint" {
+  type = string
+  default = "TODO"
+}
+variable "private_key_path" {
+  type = string
+  default = "TODO"
+}
 variable "compartment_ocid" {}
 variable "region" {default = "us-ashburn-1"}
 variable "home_region" { default = ""}
