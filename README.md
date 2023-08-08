@@ -20,16 +20,18 @@ If you don't have the required permissions and quota, contact your tenancy admin
 2. Review and accept the terms and conditions.
 
 3. Select the region where you want to deploy the stack.
+   
+4. Please choose terraform version 1.1 or above as OKE module works for that only.
 
-4. Follow the on-screen prompts and instructions to create the stack.
+5. Follow the on-screen prompts and instructions to create the stack.
 
-5. After creating the stack, click **Terraform Actions**, and select **Plan**.
+6. After creating the stack, click **Terraform Actions**, and select **Plan**.
 
-6. Wait for the job to be completed, and review the plan.
+7. Wait for the job to be completed, and review the plan.
 
     To make any changes, return to the Stack Details page, click **Edit Stack**, and make the required changes. Then, run the **Plan** action again.
 
-7. If no further changes are necessary, return to the Stack Details page, click **Terraform Actions**, and select **Apply**. 
+8. If no further changes are necessary, return to the Stack Details page, click **Terraform Actions**, and select **Apply**. 
 
 ## Validate the Deployment
 
@@ -42,18 +44,18 @@ deployed_oke_kubernetes_version = "v1.26.2"
 deployed_to_region = "ap-tokyo-1"
 dev = "Made with ❤ by Oracle Developers"
 kubeconfig_for_kubectl = "export KUBECONFIG=./generated/kubeconfig"
-ocir_name = "container_repo1"
-ocir_ocid = "ocid1.containerrepo.oc1.ap-tokyo-1.0.iaassiedupu.aaaaaaaarisfwdc55aa5qbvikte6qxw7qsdij3rz4re5qtfxnvdigwtibmmq"
+ocir_name = "container_repo"
+ocir_ocid = "ocid1.containerrepo.oc1......"
 queue_dpendpoint = "https://cell-1.queue.messaging.ap-tokyo-1.oci.oraclecloud.com"
-queue_ocid = "ocid1.queue.oc1.ap-tokyo-1.amaaaaaa2wppjyqag6eeyinjug2je6mwh4hazaa3iu6tfdpqt2ppk7njlolq" 
+queue_ocid = "ocid1.queue.oc1.ap-tokyo-1...." 
 ```
 ## Deploy Using the Terraform CLI
 
 ### Clone the Module
 Now, you'll want a local copy of this repo. You can make that with the commands:
 
-    git clone https://github.com/oracle-quickstart/oci-sch-log2bucket.git
-    cd oci-sch-log2bucket
+    git clone https://github.com/anilcourse/terraform-oci-arch-queue.git
+    cd terraform-oci-arch-queue
     ls
 
 ### Set Up and Configure Terraform
