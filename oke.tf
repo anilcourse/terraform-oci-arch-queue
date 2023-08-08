@@ -1,3 +1,6 @@
+## Copyright (c) 2020, Oracle and/or its affiliates.
+## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
+
 module "oke-quickstart" {
   source = "github.com/oracle-quickstart/terraform-oci-oke-quickstart?ref=0.9.2"
 
